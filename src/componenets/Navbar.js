@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function Navbar() {
   return (
@@ -15,10 +16,14 @@ function Navbar() {
           
             
             <input className='search-bar' type='text' placeholder='Search Product...'></input>
-        
+
+          <Link to={'/signup'}>
             <button className='btn-up'>Sign Up</button>
+          </Link>
+          
+          <Link to={'/signin'}>
             <button className='btn-in'>Sign In</button>
-        
+            </Link>
         </nav>
     </div>
   )
