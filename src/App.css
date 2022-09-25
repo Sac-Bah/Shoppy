@@ -172,9 +172,10 @@ nav ul li a{
 }
 .div-sup{
   border: 1px solid  rgb(193, 193, 193);
-  height: 450px;
+  height: 420px;
   width: 30%;
   margin-left: 20%;
+  border-right: none;
 }
 
 .head-4{
@@ -221,4 +222,84 @@ nav ul li a{
 .btn-signup:hover{
   cursor: pointer;
   background-color: rgb(42, 42, 42);
+}
+
+.div-or{
+  height: 420px;
+  width: 8%;
+  margin-left: 684px;
+  margin-top: -422px;
+  border-top: 1px solid  rgb(193, 193, 193) ;
+  border-bottom: 1px solid  rgb(193, 193, 193) ;
+
+}
+.head-5{
+  font-weight: 700;
+  padding-top: 182px ;
+  font-size: 9px;
+  padding-left: 70px;
+  
+}
+.btn-gup{
+  margin-left: 66px;
+  padding: 18px 56px;
+  margin-top: 182px;
+ font-weight: 600;
+ color:#393d46;
+ border: 1px solid rgb(193, 193, 193);
+}
+.btn-gup:hover{
+  background-color:#E1E1E1;
+  border: 1px solid #E1E1E1;
+  cursor: pointer;
+}
+.div-gbtn{
+  width: 26%;
+  height: 421px;
+  margin-left: 792px;
+  margin-top: -422px ;
+  border: 1px solid  rgb(193, 193, 193);
+  border-left: none ;
+  border-bottom: none;
+
+}
+
+.footer-para{
+  width: 480px;
+  height: 66px;
+  border: 1px solid  rgb(193, 193, 193);
+  margin-left: 273px;
+  margin-top: -1px;
+  border-right: none;
+}
+.para-6{
+  font-size: 11px;
+  color: rgb(103,103,103);
+  font-weight: 700;
+  margin-left: 320px;
+  margin-top: 25px;
+}
+
+
+
+.btn-inlink{
+ padding: 8px 10px;
+ font-size: 11px;
+ font-weight: 700;
+ color: rgb(103,103,103);
+ border: 1px solid white ;
+ margin-top: 20px;
+}
+
+.btn-inlink:hover{
+  background-color: #E1E1E1;
+  cursor: pointer;
+}
+.footer-btn{
+  width: 391px;
+  border: 1px solid  rgb(193, 193, 193);
+  height: 66px;
+  margin-left: 755px;
+  margin-top: -68px;
+  border-left: none;
 }
