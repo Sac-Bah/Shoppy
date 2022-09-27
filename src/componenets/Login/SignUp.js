@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../Firebase'
 import {createUserWithEmailAndPassword} from'firebase/auth'
+import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
 
 function SignUp() {
 
@@ -19,6 +20,14 @@ function SignUp() {
 
     .catch(err => {alert(err.message)})
 }
+
+
+  const signInWithGoogle=()=>{
+    const provider = new GoogleAuthProvider() 
+    signInWithPopup(auth,provider)
+    .then(res =>  {navigate('/')} )
+    .catch(err => alert(err.message))
+  }
   return (
     <div>
       <div className='div-sup'>
@@ -30,7 +39,7 @@ function SignUp() {
 
         <p className='para-up'>*Email</p>
         <input className='inp-up' type='email' placeholder='test@example.com' name='email'
-        onChange={event => setEmail(event.target.value)}></input>
+        onChange={event => setEmail(event.target.value)}></input> 
         
         <p className='para-up'>*Password</p>
         <input className='inp-up' type='password' placeholder='Your password' name='email'
@@ -45,7 +54,7 @@ function SignUp() {
       </div>
 
       <div className='div-gbtn'>
-      <button className='btn-gup'>Continue with Google</button>
+      <button className='btn-gup' onClick={signInWithGoogle}>Continue with Google</button>
       </div>
 
       <div className='footer-para'>

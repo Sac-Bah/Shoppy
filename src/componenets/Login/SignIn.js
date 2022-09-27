@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { auth } from '../Firebase'
 import {signInWithEmailAndPassword} from'firebase/auth'
 import { useNavigate } from 'react-router-dom'
+import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
+
 
 function SignIn() {
 
@@ -18,6 +20,12 @@ function SignIn() {
         .then(res => {navigation('/')})
 
         .catch(error => {alert(error.message)})
+    }
+    const provider = new GoogleAuthProvider() 
+    const signInWithGoogle=()=>{
+      signInWithPopup(auth,provider)
+      .then(res =>  {navigation('/')} )
+      .catch(err => alert(err.message))
     }
 
   return (
@@ -42,7 +50,7 @@ function SignIn() {
       </div>
 
       <div className='div-gbtn'>
-      <button className='btn-gup'>Continue with Google</button>
+      <button className='btn-gup' onClick={signInWithGoogle}>Continue with Google</button>
       </div>
 
       <div className='footer-para'>
