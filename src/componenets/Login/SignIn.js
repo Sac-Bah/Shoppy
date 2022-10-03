@@ -2,12 +2,12 @@ import React from 'react'
 import { useState } from 'react'
 import { auth } from '../Firebase'
 import {signInWithEmailAndPassword} from'firebase/auth'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
-
+import { useLogin } from '../AuthContext'
 
 function SignIn() {
-
+  const{setIsLoggedIn}= useLogin()
   const navigation= useNavigate()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
@@ -17,14 +17,14 @@ function SignIn() {
       e.preventDefault()
         signInWithEmailAndPassword(auth,email,password)
 
-        .then(res => {navigation('/')})
+        .then(res => {navigation('/'); setIsLoggedIn(true)})
 
         .catch(error => {alert(error.message)})
     }
     const provider = new GoogleAuthProvider() 
     const signInWithGoogle=()=>{
       signInWithPopup(auth,provider)
-      .then(res =>  {navigation('/')} )
+      .then(res =>  {navigation('/'); setIsLoggedIn(true)} )
       .catch(err => alert(err.message))
     }
 
@@ -57,7 +57,9 @@ function SignIn() {
         <p className='para-6'>Don't have an account?</p>
       </div>
       <div className='footer-btn'>
+        <Link to={'/signup'}>
       <button className='btn-inlink'>Sign Up</button>
+      </Link>
       </div>
     </div>
   )

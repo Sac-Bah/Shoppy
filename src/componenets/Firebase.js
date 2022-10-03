@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
-import { useNavigate } from "react-router-dom";
+import {getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged} from 'firebase/auth'
+import { useState , useEffect } from "react";
 
 
 
@@ -22,5 +22,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
 export {auth}
 
-
+export function useAuth(){
+  const[currentUser, setCurrentUser]= useState()
+  useEffect(()=>{
+    const unsub = onAuthStateChanged(auth, user => setCurrentUser(user))
+    return unsub
+  },[])
+  return currentUser
+}
 

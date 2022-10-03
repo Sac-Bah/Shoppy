@@ -9,20 +9,22 @@
   width: 80px;
   padding: 6px;
   margin-left: 5%;
+  border-radius: 52px;
 }
 
-nav ul {
+
+.nav-ul {
   margin-top: -72px;
   margin-left: 12%;
 
 }
 
-nav ul li {
+.nav-link {
   list-style: none;
 display: inline-block;
 }
 
-nav ul li a{
+.links-a{
   color: rgb(133, 133, 133);
   display: block;
   text-decoration: none;
@@ -30,6 +32,9 @@ nav ul li a{
   line-height: 70px;
   font-size: 13px;
   font-family: 'Inter', sans-serif;
+}
+.links-a:hover{
+  color: rgb(133, 133, 133);
 }
 
 .search-bar{
@@ -176,6 +181,7 @@ nav ul li a{
   width: 30%;
   margin-left: 20%;
   border-right: none;
+  margin-top: 5px;
 }
 
 .head-4{
@@ -228,7 +234,7 @@ nav ul li a{
   height: 420px;
   width: 8%;
   margin-left: 684px;
-  margin-top: -422px;
+  margin-top: -420px;
   border-top: 1px solid  rgb(193, 193, 193) ;
   border-bottom: 1px solid  rgb(193, 193, 193) ;
 
@@ -255,9 +261,9 @@ nav ul li a{
 }
 .div-gbtn{
   width: 26%;
-  height: 421px;
+  height: 420px;
   margin-left: 792px;
-  margin-top: -422px ;
+  margin-top: -420px ;
   border: 1px solid  rgb(193, 193, 193);
   border-left: none ;
   border-bottom: none;
@@ -269,7 +275,6 @@ nav ul li a{
   height: 66px;
   border: 1px solid  rgb(193, 193, 193);
   margin-left: 273px;
-  margin-top: -1px;
   border-right: none;
 }
 .para-6{
@@ -300,6 +305,16 @@ nav ul li a{
   border: 1px solid  rgb(193, 193, 193);
   height: 66px;
   margin-left: 755px;
-  margin-top: -68px;
+  margin-top: -66px;
   border-left: none;
+}
+
+.link-girl{
+  width: 25px;
+  border-radius: 35px;
+}
+
+.dropdown{
+  margin-left: 85%;
+  margin-top: -66px;
 }

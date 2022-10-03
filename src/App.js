@@ -7,13 +7,21 @@ import Featured from './componenets/Featured';
 import Recommended from './componenets/Recommended';
 import SignUp from './componenets/Login/SignUp';
 import SignIn from './componenets/Login/SignIn';
+import GuestNav from './componenets/Login/GuestNav';
+import { AuthProvider } from './componenets/AuthContext';
+import {useLogin} from './componenets/AuthContext'
+
+
 
 function App() {
-  return (
+//  const loggedIn= props.isLoggedIn 
 
+  return (
+    <AuthProvider>
     <Router>
-    <div >
+   
     <Navbar/>
+   
      <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/shop' element={<Shop/>}></Route>
@@ -22,8 +30,11 @@ function App() {
       <Route path='/signup' element={<SignUp/>}></Route>
       <Route path='/signin' element={<SignIn/>}></Route>
       </Routes>
-    </div>
+      
+
     </Router>
+    </AuthProvider>
+  
 
   );
 }
