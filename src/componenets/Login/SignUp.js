@@ -4,10 +4,10 @@ import {Link, useNavigate } from 'react-router-dom'
 import { auth } from '../Firebase'
 import {createUserWithEmailAndPassword} from'firebase/auth'
 import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
-import { useLogin } from '../AuthContext'
+
 
 function SignUp() {
-  const{setIsLoggedIn}= useLogin()
+ 
   const navigate = useNavigate()
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
@@ -17,7 +17,7 @@ function SignUp() {
     e.preventDefault()
     createUserWithEmailAndPassword(auth, email,password)
 
-    .then(res => {navigate('/'); setIsLoggedIn(true)})
+    .then(res => {navigate('/');})
 
     .catch(err => {alert(err.message)})
 }
@@ -26,7 +26,7 @@ function SignUp() {
   const signInWithGoogle=()=>{
     const provider = new GoogleAuthProvider() 
     signInWithPopup(auth,provider)
-    .then(res =>  {navigate('/'); setIsLoggedIn(true)} )
+    .then(res =>  {navigate('/')} )
     .catch(err => {alert(err.message)})
   }
   return (
@@ -35,15 +35,15 @@ function SignUp() {
         <h3 className='head-4'>Sign up to B-Optics</h3>
 
         <p className='para-up'>*Full Name</p>
-        <input className='inp-up' type='text' placeholder='Saber'  name='username'
+        <input className='inp-up' type='text' placeholder='Saber'  
         onChange={event => setUsername(event.target.value)}></input>
 
         <p className='para-up'>*Email</p>
-        <input className='inp-up' type='email' placeholder='test@example.com' name='email'
+        <input className='inp-up' type='email' placeholder='test@example.com'
         onChange={event => setEmail(event.target.value)}></input> 
         
         <p className='para-up'>*Password</p>
-        <input className='inp-up' type='password' placeholder='Your password' name='password'
+        <input className='inp-up' type='password' placeholder='Your password' 
         onChange={event => setPassword(event.target.value)}></input>
 
         <button type='submit' className='btn-signup' onClick={handleRegister} >Sign Up</button>

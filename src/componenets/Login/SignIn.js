@@ -4,10 +4,10 @@ import { auth } from '../Firebase'
 import {signInWithEmailAndPassword} from'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
-import { useLogin } from '../AuthContext'
+
 
 function SignIn() {
-  const{setIsLoggedIn}= useLogin()
+ 
   const navigation= useNavigate()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
@@ -17,14 +17,14 @@ function SignIn() {
       e.preventDefault()
         signInWithEmailAndPassword(auth,email,password)
 
-        .then(res => {navigation('/'); setIsLoggedIn(true)})
+        .then(res => {navigation('/')})
 
         .catch(error => {alert(error.message)})
     }
     const provider = new GoogleAuthProvider() 
     const signInWithGoogle=()=>{
       signInWithPopup(auth,provider)
-      .then(res =>  {navigation('/'); setIsLoggedIn(true)} )
+      .then(res =>  {navigation('/')})
       .catch(err => alert(err.message))
     }
 

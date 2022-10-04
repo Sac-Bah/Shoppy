@@ -10,14 +10,14 @@ function Navbar() {
   return (
     <div className='nav-div'>
         <nav className='nav-m'>
-            <a href='/'>
+        <Link to={'/home'}>
             <img className='logo' src="../images/logo.png"/>
-            </a>
+           </Link>
             <ul className='nav-ul'>
-              <li className='nav-link'><a  className='links-a' href='http://localhost:3000/'>Home</a></li>
-              <li className='nav-link'><a  className='links-a' href='http://localhost:3000/shop'>Shop</a></li>
-              <li className='nav-link'><a  className='links-a' href='http://localhost:3000/featured'>Featured</a></li>
-              <li className='nav-link'><a  className='links-a' href='http://localhost:3000/recommended'>Recommended</a></li>
+              <li className='nav-link'><a className='links-a' href='http://localhost:3000/home'>Home</a></li>
+              <li className='nav-link'><a className='links-a' href='http://localhost:3000/shop'>Shop</a></li>
+              <li className='nav-link'><a className='links-a' href='http://localhost:3000/featured'>Featured</a></li>
+              <li className='nav-link'><a className='links-a' href='http://localhost:3000/recommended'>Recommended</a></li>
             </ul>
           
             

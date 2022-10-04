@@ -3,13 +3,14 @@ import { useAuth } from '../Firebase'
 import { auth } from '../Firebase'
 import {signOut} from 'firebase/auth'
 import { useLogin } from '../AuthContext'
+import userEvent from '@testing-library/user-event'
 
 
 function GuestNav() {
-  const{setIsLoggedIn}= useLogin()
+  const{isLoggedIn}= useLogin()
   function logout(){
     signOut(auth)
-    .then(res => setIsLoggedIn(false))
+    .then(res => res)
     .catch(err=> alert(err.message))
   }
   return (
@@ -29,7 +30,7 @@ function GuestNav() {
             <input className='search-bar' type='text' placeholder='Search Product...'></input>
         <div className='dropdown'>
         <a className="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-          Name <img className='link-girl' src='./images/girl1.jpg'></img>
+          {isLoggedIn && <><span>{isLoggedIn.displayName}</span> &nbsp; <img className='link-girl' src={isLoggedIn.photoURL}></img></>}
         </a>
 
         <ul className="dropdown-menu">
