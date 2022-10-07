@@ -10,7 +10,8 @@ import SignIn from './componenets/Login/SignIn';
 import GuestNav from './componenets/Login/GuestNav';
 import { AuthProvider } from './componenets/AuthContext';
 import {useLogin} from './componenets/AuthContext'
-
+import Profile from './componenets/Profile/Profile';
+import EditProfile from './componenets/Profile/EditProfile';
 
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
       <Route path='/recommended' element={<Recommended/>}></Route>
       <Route path='/signup' element={<SignUp/>}></Route>
       <Route path='/signin' element={<SignIn/>}></Route>
+      <Route path='/profile' element={<Profile/>}></Route>
+      <Route path='/profile/edit' element={<EditProfile/>}></Route>
       </Routes>
       
 

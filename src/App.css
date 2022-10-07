@@ -309,12 +309,206 @@ display: inline-block;
   border-left: none;
 }
 
-.link-girl{
+.profile{
   width: 35px;
   border-radius: 35px;
 }
 
 .dropdown{
   margin-left: 85%;
+  margin-top: -69px;
+}
+
+.p-container{
+  height: 650px;
+  width: 50%;
+  border:1px solid rgb(203, 203, 203);
+  margin-top: 40px;
+  margin-left: 25%;
+}
+
+.p-cover{
+  margin-top: 10px;
+  width: 640px;
+  height: 200px;
+  margin-left: 16px;
+}
+.p-dp{
+  border-radius: 100px;
+  width: 108px;
+  margin-left: 30px;
   margin-top: -66px;
+}
+.btn-editp{
+  float: right;
+  margin-left: 400px;
+  padding: 12px 16px;
+  color: white;
+  background-color: black;
+  margin-top: -24px;
+  position: absolute;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+.btn-editp:hover{
+  background-color: #2A2A2A;
+  border: none;
+}
+.h-name{
+  padding-top: 38px ;
+  padding-left:36px;
+  font-size: 28px;
+}
+.p-title-email{
+  padding-top:15px; 
+  padding-left:36px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5c6472;
+}
+.p-email{
+  padding-left:36px;
+  font-size: 14px;
+ font-weight: 600;
+}
+
+.p-title-address{
+  padding-top:5px; 
+  padding-left:36px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5c6472
+}
+.p-address{
+  padding-left:36px;
+  font-size: 14px;
+ font-weight: 600;
+ color: #9fa3aa;
+ font-style: italic;
+}
+.p-title-mobile{
+  padding-top:5px; 
+  padding-left:36px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5c6472
+}
+.p-title-date{
+padding-top:5px; 
+padding-left:36px;
+font-size: 12px;
+font-weight: 600;
+color: #5c6472
+}
+.p-date{
+  padding-left:36px;
+  font-size: 14px;
+ font-weight: 600;
+}
+.inp-cover{
+  color:white;
+  background-color: black;
+  border-radius: 90px;
+  width: 32px;
+  padding: 5px 8px;
+  margin-left: -30px;
+  
+}
+.inp-dp{
+  color:white;
+  background-color: black;
+  border-radius: 90px;
+  width: 32px;
+  padding: 5px 8px;
+  margin-left: 590px;
+ 
+
+}
+.div-lbl{
+  margin-top: -76px;
+}
+.h-etitle{
+  font-size: 19px;
+  margin-top: 30px;
+  margin-left: 45%;
+}
+.p-title-name{
+  padding-top:45px; 
+padding-left:36px;
+font-size: 12px;
+font-weight: 600;
+color: #5c6472
+}
+.inp-ename{
+  margin-top:5px; 
+margin-left:36px;
+padding: 8px;
+width: 530px;
+font-size: 14px;
+border: 1px solid  rgb(203, 203, 203);
+font-weight: 700;
+}
+
+.inp-e-email{
+  margin-top:5px; 
+margin-left:36px;
+padding: 8px;
+width: 530px;
+font-size: 14px;
+border: 1px solid  #CBCBCB;
+font-weight: 700;
+margin-bottom: 15px;
+}
+
+.inp-eaddress{
+margin-top:5px; 
+margin-left:36px;
+padding: 8px;
+width: 530px;
+font-size: 14px;
+border: 1px solid  rgb(203, 203, 203);
+margin-bottom: 15px;
+font-weight: 700;
+}
+.inp-enum{
+  margin-top:5px; 
+margin-left:36px;
+padding: 8px;
+width: 530px;
+font-size: 14px;
+border: 1px solid  rgb(203, 203, 203);
+margin-bottom: 30px;
+font-weight: bold;
+}
+
+.btn-back{
+  margin-top:5px; 
+margin-left:36px;
+border: 1px solid #dddada ;
+padding: 15px 18px;
+}
+.btn-back:hover{
+  border:1px solid #C6C6C6;
+
+}
+
+.btn-updt{
+  margin-top:5px; 
+margin-left:252px;
+border: none;
+padding: 15px 18px;
+background-color: black;
+color: white;
+
+}
+.btn-updt:hover{
+  border: none;
+  background-color: rgb(42, 42, 42);
+}
+.p-econtainer{
+  height: 850px;
+  width: 50%;
+  margin-top: 40px;
+  margin-left: 25%;
 }
