@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import {getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged} from 'firebase/auth'
 import { useState , useEffect } from "react";
+import {getStorage} from 'firebase/storage'
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
@@ -21,8 +22,10 @@ const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 const auth = getAuth(app)
+const storage= getStorage()
 export {auth}
 export {app}
+export {storage}
 
 // export function useAuth(){
 //   const[currentUser, setCurrentUser]= useState()

@@ -27,6 +27,7 @@ function Profile() {
      <p className='p-title-address'>Address</p>
      <p className='p-address'>Address not set</p>
      <p className='p-title-mobile'>Mobile</p>
+     <p>{isLoggedIn.phoneNumber}</p>
      <p className='p-title-date'>Date Joined</p>
      <p className='p-date'>{isLoggedIn.metadata.creationTime}</p>
 

@@ -415,6 +415,10 @@ color: #5c6472
   margin-left: -30px;
   
 }
+.inp-cover, .inp-dp:hover{
+  cursor: pointer;
+}
+
 .inp-dp{
   color:white;
   background-color: black;
