@@ -1,12 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import {Link, useNavigate } from 'react-router-dom'
-import { auth } from '../Firebase'
+import { auth, db } from '../Firebase'
 import {createUserWithEmailAndPassword} from'firebase/auth'
 import {signInWithPopup, GoogleAuthProvider, updateProfile} from 'firebase/auth'
 import { useLogin } from '../AuthContext'
 import { user } from '../AuthContext'
 import firebase from 'firebase/compat/app'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import { async } from '@firebase/util'
 
 function SignUp() {
  const {isLoggedIn}= useLogin()
@@ -21,29 +23,38 @@ function SignUp() {
     
   };
   
-  
+
 
   const handleRegister = (e) => {
     e.preventDefault()
     createUserWithEmailAndPassword(auth, email,password)
-
-    .then((res) => {
+    
+     
       
+   
+    
+    .then(async (res) => {
+      await setDoc(doc(db,'users', res.user.uid), {username, email, password, timeStamp: serverTimestamp(), address:"", phoneNumber:""})
       navigate('/');
-       firebase.auth().currentUser.updateProfile(update);
+       firebase.auth().currentUser.updateProfile(update)}
+    )
+      .catch(err => {alert(err.message)})
 
-    })
+    
 
-    .catch(err => {alert(err.message)})
+    
 
    
-}
+  }
 
 
   const signInWithGoogle=()=>{
     const provider = new GoogleAuthProvider() 
     signInWithPopup(auth,provider)
-    .then(res =>  {navigate('/')} )
+    .then((res) => {
+       setDoc(doc(db,'users', res.user.uid), {username:res.user.displayName, email: res.user.email, timeStamp: serverTimestamp(), address:"", phoneNumber:""})
+      navigate('/')}
+      )
     .catch(err => {alert(err.message)})
   }
   return (

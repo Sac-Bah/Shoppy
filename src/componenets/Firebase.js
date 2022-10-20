@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import {getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged} from 'firebase/auth'
 import { useState , useEffect } from "react";
 import {getStorage} from 'firebase/storage'
+import {getFirestore} from 'firebase/firestore'
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
@@ -23,9 +24,11 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const auth = getAuth(app)
 const storage= getStorage()
+const db= getFirestore(app)
 export {auth}
 export {app}
 export {storage}
+export {db}
 
 // export function useAuth(){
 //   const[currentUser, setCurrentUser]= useState()

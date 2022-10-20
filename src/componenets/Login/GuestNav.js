@@ -21,7 +21,7 @@ function GuestNav() {
     if(isLoggedIn && isLoggedIn.photoURL){
     setPhotoURL(isLoggedIn.photoURL)
     }
-    console.log(isLoggedIn.photoURL)
+    
   }, [isLoggedIn])
   return (
     <div>

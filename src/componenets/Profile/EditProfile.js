@@ -1,12 +1,9 @@
-import { updateCurrentUser } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLogin } from '../AuthContext'
 import { upload } from '../AuthContext'
 import firebase from 'firebase/compat/app'
-import { auth } from '../Firebase'
-import { updateProfile} from 'firebase/auth'
-import Profile from './Profile'
+
 
 function EditProfile() {
   const navigation = useNavigate()
@@ -16,6 +13,7 @@ function EditProfile() {
   const [dp, setDp]=useState(isLoggedIn.photoURL)
   const [loading, setLoading]=useState(false)
   const [coverPhoto, setCoverPhoto]= useState('https://cdn.images.express.co.uk/img/dynamic/143/590x/No-Man-s-Sky-gets-alternative-covers-689362.jpg')
+  
   const [newUserName, setNewUserName]= useState(isLoggedIn.displayName)
   const [address, setAddress]= useState("")
   const [number, setNumber]= useState('')
@@ -43,10 +41,10 @@ function EditProfile() {
    
    }
    const handleDpChange=(e)=>{
-   if( e.target.files[0]){
+   if( e.target.files[0] && dp===null){
     setDp(e.target.files[0])
    }
-  
+
   }
 
   return (
@@ -68,26 +66,27 @@ function EditProfile() {
         </label>
      </div>
 
-
+<form id='edit-form'>
      <p className='p-title-name'>* Full name</p>
-     <input type='text' className='inp-ename' name='newUserName' value={newUserName} placeholder='Enter new name' onChange={e => setNewUserName(e.target.value)}></input>
+     <input type='text' className='inp-ename' name='newUserName'  onChange={e => setNewUserName(e.target.value)}></input>
 
      <p className='p-title-email'>* Email Address</p>
      <input type='text' className='inp-e-email' disabled placeholder={isLoggedIn.email} ></input>
 
-     <p className='p-title-address'>Address (Will be used for checkout)</p>
-     <input type='text' className='inp-eaddress' name='address' value={address} placeholder='H.1 St.3, Lahore Cantt, Punjab, Pakistan' onChange={e => setAddress(e.target.value)}>
+     <label htmlFor='address-inp' className='p-title-address'>Address (Will be used for checkout)</label>
+     <input id='address-inp' type='text' className='inp-eaddress' name='address' placeholder='H.1 St.3, Lahore Cantt, Punjab, Pakistan' onChange={e => setAddress(e.target.value)}>
      </input>
 
-     <p className='p-title-mobile'>Mobile Number (Will be used for checkout)</p>
-     <input type='tel' className='inp-enum' placeholder='+92' name='number' value={number} onChange={e => setNumber(e.target.value)}></input>
+     <label  htmlFor='phone-inp' className='p-title-mobile'>Mobile Number (Will be used for checkout)</label>
+     <input  id='phone-inp' type='tel' className='inp-enum' placeholder='+92' name='number' onChange={e => setNumber(e.target.value)}></input>
 
 
      <Link to={'/profile'}>
      <button className='btn-back'>Back to Profile</button> </Link>
      <button type='submit' disabled={loading} className='btn-updt' onClick={handleUpdate}>Update Profile</button>
+     </form>
      </div>
-
+ 
     </div>
   )
   }

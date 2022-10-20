@@ -19,9 +19,10 @@ const AuthContext= React.createContext()
 
   useEffect(()=>{
     app.auth().onAuthStateChanged((user) => {
+      console.log(user)
       setIsLoggedIn(user)
       setPending(false)
-      console.log(user)
+    
     })},[])
     if(pending){
       return <> </>
