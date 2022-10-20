@@ -329,14 +329,14 @@ display: inline-block;
 
 .p-cover{
   margin-top: 10px;
-  width: 640px;
+  width: 580px;
   height: 200px;
-  margin-left: 16px;
+  margin-left: 32px;
 }
 .p-dp{
   border-radius: 100px;
   width: 108px;
-  margin-left: 30px;
+  margin-left: 42px;
   margin-top: -66px;
 }
 .btn-editp{
@@ -412,8 +412,7 @@ color: #5c6472
   border-radius: 90px;
   width: 32px;
   padding: 5px 8px;
-  margin-left: -30px;
-  
+  margin-left: 556px;
 }
 .inp-cover, .inp-dp:hover{
   cursor: pointer;
@@ -425,12 +424,18 @@ color: #5c6472
   border-radius: 90px;
   width: 32px;
   padding: 5px 8px;
-  margin-left: 590px;
- 
+  margin-left: -22px;
+  margin-bottom: -70px;
+
 
 }
 .div-lbl{
-  margin-top: -76px;
+  margin-left: 20%;
+  margin-top: -12px;
+}
+.div-lbl2{
+  margin-top: -61px;
+  
 }
 .h-etitle{
   font-size: 19px;
@@ -443,6 +448,7 @@ padding-left:36px;
 font-size: 12px;
 font-weight: 600;
 color: #5c6472
+
 }
 .inp-ename{
   margin-top:5px; 
@@ -515,4 +521,10 @@ color: white;
   width: 50%;
   margin-top: 40px;
   margin-left: 25%;
+}
+#edit-cover[type='file']{
+  display: none;
+}
+#edit-dp[type='file']{
+  display: none;
 }

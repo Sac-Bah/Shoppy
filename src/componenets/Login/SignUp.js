@@ -34,7 +34,7 @@ function SignUp() {
    
     
     .then(async (res) => {
-      await setDoc(doc(db,'users', res.user.uid), {username, email, password, timeStamp: serverTimestamp(), address:"", phoneNumber:""})
+      await setDoc(doc(db,'users', res.user.uid), {username, email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:''})
       navigate('/');
        firebase.auth().currentUser.updateProfile(update)}
     )
@@ -52,7 +52,7 @@ function SignUp() {
     const provider = new GoogleAuthProvider() 
     signInWithPopup(auth,provider)
     .then((res) => {
-       setDoc(doc(db,'users', res.user.uid), {username:res.user.displayName, email: res.user.email, timeStamp: serverTimestamp(), address:"", phoneNumber:""})
+       setDoc(doc(db,'users', res.user.uid), {username:res.user.displayName, email: res.user.email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:''})
       navigate('/')}
       )
     .catch(err => {alert(err.message)})

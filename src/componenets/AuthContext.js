@@ -41,20 +41,20 @@ const AuthContext= React.createContext()
 export const useLogin=()=>
   useContext(AuthContext)
 
-export async function upload(file, isLoggedIn,setPending){
+// export async function upload(file, isLoggedIn,setPending){
 
-    const fileRef= ref(storage, isLoggedIn.uid + '.jpg')
-    setPending(true)
-     const snapshot= await uploadBytes(fileRef,file)
+//     const fileRef= ref(storage, isLoggedIn.uid + '.jpg')
+//     setPending(true)
+//      const snapshot= await uploadBytes(fileRef,file)
 
-     const photoUrl= await getDownloadURL(fileRef)
+//      const photoUrl= await getDownloadURL(fileRef)
 
-     updateProfile(isLoggedIn, {photoURL:photoUrl})
+//      updateProfile(isLoggedIn, {photoURL:photoUrl})
 
-     setPending(false)
-     alert('Profile updated successfully. Refresh your page to see the changes!' )
+//      setPending(false)
+//      alert('Profile updated successfully. Refresh your page to see the changes!' )
    
- }
+//  }
 
 
 
