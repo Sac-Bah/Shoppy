@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import {Link, useNavigate } from 'react-router-dom'
 import { auth, db } from '../Firebase'
@@ -20,39 +20,32 @@ function SignUp() {
 
   const update = {
     displayName: username
-    
-  };
-  
 
+  };
+
+  
 
   const handleRegister = (e) => {
     e.preventDefault()
     createUserWithEmailAndPassword(auth, email,password)
     
-     
-      
-   
-    
-    .then(async (res) => {
-      await setDoc(doc(db,'users', res.user.uid), {username, email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:''})
-      navigate('/');
-       firebase.auth().currentUser.updateProfile(update)}
-    )
+      .then(async (res) => {
+        firebase.auth().currentUser.updateProfile(update)
+        await setDoc(doc(db,'users', res.user.uid), {username, email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:res.user.photoURL})
+        
+        navigate('/')
+        
+       
+      })
       .catch(err => {alert(err.message)})
-
-    
-
-    
-
-   
   }
 
 
   const signInWithGoogle=()=>{
     const provider = new GoogleAuthProvider() 
     signInWithPopup(auth,provider)
-    .then((res) => {
-       setDoc(doc(db,'users', res.user.uid), {username:res.user.displayName, email: res.user.email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:''})
+    .then(async(res) => {
+      await setDoc(doc(db,'users', res.user.uid), {username:res.user? username : res.user.displayName, email: res.user.email, timeStamp: serverTimestamp(), address:'', phoneNumber:'', coverPhoto:'', profilePhoto:res.user.photoURL})
       navigate('/')}
       )
     .catch(err => {alert(err.message)})

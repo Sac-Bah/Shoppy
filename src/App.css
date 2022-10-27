@@ -320,28 +320,29 @@ display: inline-block;
 }
 
 .p-container{
-  height: 650px;
-  width: 50%;
+  height: 750px;
+  width: 46%;
   border:1px solid rgb(203, 203, 203);
   margin-top: 40px;
-  margin-left: 25%;
+  margin-left: 26%;
 }
 
 .p-cover{
   margin-top: 10px;
-  width: 580px;
+  width: 590px;
   height: 200px;
-  margin-left: 32px;
+  margin-left: 16px;
 }
 .p-dp{
   border-radius: 100px;
   width: 108px;
-  margin-left: 42px;
+  margin-left: 28px;
   margin-top: -66px;
+  height: 105px;
 }
 .btn-editp{
   float: right;
-  margin-left: 400px;
+  margin-left: 338px;
   padding: 12px 16px;
   color: white;
   background-color: black;
@@ -412,7 +413,7 @@ color: #5c6472
   border-radius: 90px;
   width: 32px;
   padding: 5px 8px;
-  margin-left: 556px;
+  margin-left: 544px;
 }
 .inp-cover, .inp-dp:hover{
   cursor: pointer;
@@ -424,17 +425,14 @@ color: #5c6472
   border-radius: 90px;
   width: 32px;
   padding: 5px 8px;
-  margin-left: -22px;
-  margin-bottom: -70px;
-
-
+  margin-left: -26px;
 }
 .div-lbl{
-  margin-left: 20%;
-  margin-top: -12px;
+  margin-left: 19%;
+  margin-top: -10px;
 }
 .div-lbl2{
-  margin-top: -61px;
+  margin-top: -66px;
   
 }
 .h-etitle{

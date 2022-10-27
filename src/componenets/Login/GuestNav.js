@@ -3,26 +3,52 @@ import { auth } from '../Firebase'
 import {signOut} from 'firebase/auth'
 import { useLogin } from '../AuthContext'
 import { Link,useNavigate } from 'react-router-dom'
-
+import {  doc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { db} from '../Firebase'
 
 function GuestNav() {
   const navigation= useNavigate()
   const{isLoggedIn}= useLogin()
   const [photoURL, setPhotoURL]= useState("https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=")
 
+  const[userData,setUserData]=useState(null)
+  const [loading,setLoading]=useState(true)
 
-  function logout(){
-    signOut(auth)
-    .then(res => {navigation('/signin')})
-    .catch(err=> alert(err.message))
-  }
 
   useEffect(()=>{
     if(isLoggedIn && isLoggedIn.photoURL){
     setPhotoURL(isLoggedIn.photoURL)
     }
-    
-  }, [isLoggedIn])
+  }, [isLoggedIn])  
+
+  const getUser=async()=>{ 
+    const userCollection= doc(db,'users',isLoggedIn.uid)
+     await onSnapshot(userCollection,(doc)=>{
+      console.log('user data =>',doc.data())
+      setLoading(false)
+      setUserData(doc.data())
+    })
+    }
+   
+    useEffect(()=>{
+      getUser()
+      },[]);
+      if(loading){
+        return <></>
+      }
+  
+      
+
+  function logout(){
+    signOut(auth)
+    .then(res => {navigation('/signup')})
+    .catch(err=> alert(err.message))
+  }
+
+  
+
+
+  
   return (
     <div>
         <nav className='nav-m'>
@@ -40,7 +66,7 @@ function GuestNav() {
             <input className='search-bar' type='text' placeholder='Search Product...'></input>
         <div className='dropdown'>
         <a className="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-          {isLoggedIn && <><span>{isLoggedIn.displayName}</span> &nbsp; <img className='profile' src={photoURL}></img></>}
+          {isLoggedIn && <><span>{userData? userData.username:''}</span> &nbsp; <img className='profile' src={photoURL}></img></>}
         </a>
 
         <ul className="dropdown-menu">

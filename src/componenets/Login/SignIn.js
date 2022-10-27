@@ -1,10 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
-import { auth } from '../Firebase'
+import { auth, db } from '../Firebase'
 import {signInWithEmailAndPassword} from'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import {signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
-
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
 
 function SignIn() {
  
@@ -24,7 +24,10 @@ function SignIn() {
     const provider = new GoogleAuthProvider() 
     const signInWithGoogle=()=>{
       signInWithPopup(auth,provider)
-      .then(res =>  {navigation('/')})
+      .then(async(res) => {
+       await setDoc(doc(db,'users', res.user.uid), {username:res.user.displayName, email: res.user.email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:res.user.photoURL})
+        navigation('/')}
+        )
       .catch(err => alert(err.message))
     }
 
