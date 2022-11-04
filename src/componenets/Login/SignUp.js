@@ -28,14 +28,10 @@ function SignUp() {
   const handleRegister = (e) => {
     e.preventDefault()
     createUserWithEmailAndPassword(auth, email,password)
-    
       .then(async (res) => {
         firebase.auth().currentUser.updateProfile(update)
-        await setDoc(doc(db,'users', res.user.uid), {username, email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:res.user.photoURL})
-        
+        await setDoc(doc(db,'users', res.user.uid), {username, email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:res.user.photoURL})    
         navigate('/')
-        
-       
       })
       .catch(err => {alert(err.message)})
   }
@@ -45,7 +41,7 @@ function SignUp() {
     const provider = new GoogleAuthProvider() 
     signInWithPopup(auth,provider)
     .then(async(res) => {
-      await setDoc(doc(db,'users', res.user.uid), {username:res.user? username : res.user.displayName, email: res.user.email, timeStamp: serverTimestamp(), address:'', phoneNumber:'', coverPhoto:'', profilePhoto:res.user.photoURL})
+      await setDoc(doc(db,'users', res.user.uid), {username:res.user.displayName, email: res.user.email, timeStamp: serverTimestamp(), address:'', phoneNumber:'', coverPhoto:'', profilePhoto:res.user.photoURL})
       navigate('/')}
       )
     .catch(err => {alert(err.message)})

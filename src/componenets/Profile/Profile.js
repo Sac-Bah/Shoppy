@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLogin } from '../AuthContext'
-import {  doc, onSnapshot, updateDoc } from 'firebase/firestore'
+import {  doc, onSnapshot } from 'firebase/firestore'
 import { db} from '../Firebase'
 
 function Profile() {
@@ -13,7 +13,6 @@ function Profile() {
   const getUser=async()=>{ 
     const userCollection= doc(db,'users',isLoggedIn.uid)
      await onSnapshot(userCollection,(doc)=>{
-      console.log('user data =>',doc.data())
       setLoading(false)
       setUserData(doc.data())
     })
@@ -40,18 +39,18 @@ function Profile() {
   return (
     <div className='p-container'>
 
-      <img className='p-cover' src={userData.coverPhoto||'../images/cover.jpg'}/>
+      <img className='p-cover' src='../images/cover.jpg'/>
      
       <img className='p-dp' src={photoURL}/>
       <Link to={'/profile/edit'}>
      <button className='btn-editp'>Edit Profile</button> </Link>
-     <h3 className='h-name'>{userData.username||'Write your name here'}</h3>
+     <h3 className='h-name'>{userData?userData.username:'Write your name here'}</h3>
      <p className='p-title-email'>Email</p>
      <p className='p-email'>{isLoggedIn.email}</p>
      <p className='p-title-address'>Address</p>
     {userData ?  <p className='p-email'>{userData.address}</p> : <p className='p-address'>'Address not set'</p>}
      <p className='p-title-mobile'>Mobile</p>
-     <p className='p-email'>{userData.phoneNumber||''}</p>
+     <p className='p-email'>{userData?userData.phoneNumber:''}</p>
      <p className='p-title-date'>Date Joined</p>
      <p className='p-date'>{isLoggedIn.metadata.creationTime}</p>
 

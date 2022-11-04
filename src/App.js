@@ -12,7 +12,8 @@ import { AuthProvider } from './componenets/AuthContext';
 import {useLogin} from './componenets/AuthContext'
 import Profile from './componenets/Profile/Profile';
 import EditProfile from './componenets/Profile/EditProfile';
-
+import ProductForm from './componenets/Login/Product/ProductForm';
+import ProductDisplay from './componenets/Login/Product/ProductDisplay';
 
 function App() {
 //  const loggedIn= props.isLoggedIn 
@@ -30,8 +31,10 @@ function App() {
       <Route path='/recommended' element={<Recommended/>}></Route>
       <Route path='/signup' element={<SignUp/>}></Route>
       <Route path='/signin' element={<SignIn/>}></Route>
+      <Route path='/create-product' element={<ProductForm/>}></Route>
       <Route path='/profile' element={<Profile/>}></Route>
       <Route path='/profile/edit' element={<EditProfile/>}></Route>
+      <Route path='/product/:id' element={<ProductDisplay/>}></Route>
       </Routes>
       
 

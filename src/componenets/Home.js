@@ -1,6 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useState,useEffect } from 'react'
+import {  collection,getDocs} from 'firebase/firestore'
+import { db} from './Firebase'
+
 function Home() {
+
+  const [data,setData]= useState([])
+ 
+  useEffect(() => {
+    const getThings = async () =>{ 
+      const result= await getDocs(collection(db, 'products'))
+      setData(result.docs.map(doc => ({...doc.data(), id: doc.id})))
+    }
+    getThings()
+
+  }, [])
+
+  
+
   return (
     <div>
       <div className='div-home'>
@@ -13,6 +31,24 @@ function Home() {
 
       <div className='div2-home'>
         <img className="girl1" src='../images/girl1.jpg'></img>
+      </div>
+
+      <div className='feat-link-div'>
+        <h2 className='flink-head'>Featured Products</h2>
+        <a className='feat-link' href='http://localhost:3000/featured'>See All</a>
+      </div>
+      <div className='grid-div'>
+{data.map(pdata=>{
+return(<Link  style={{ textDecoration: 'none' }} to={`/product/${pdata.id}`}><div className='feat-prdct-div'>
+        <div className='prdct-img-div'>
+          <img className='prdct-img' src={pdata.img}></img>
+        </div>
+        <div className='n-b-div'>
+          <h3 className='p-name'>{pdata.name}</h3>
+          <p className='p-brand'>{pdata.brand}</p>
+        </div>
+      </div>
+      </Link>)})}
       </div>
     </div>
   )

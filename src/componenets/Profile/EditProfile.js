@@ -12,7 +12,7 @@ function EditProfile() {
   const navigate = useNavigate()
   const{isLoggedIn}= useLogin()
   const [photoURL, setPhotoURL]= useState(isLoggedIn?.photoURL)
-  // const [coverPhoto, setCoverPhoto]= useState('https://cdn.images.express.co.uk/img/dynamic/143/590x/No-Man-s-Sky-gets-alternative-covers-689362.jpg')
+  const [coverPhoto, setCoverPhoto]= useState('https://cdn.images.express.co.uk/img/dynamic/143/590x/No-Man-s-Sky-gets-alternative-covers-689362.jpg')
   const[uploading,setUploading]=useState(false)
   const[url,setUrl]=useState('')
   const[userData,setUserData]=useState(null)
@@ -40,6 +40,7 @@ function EditProfile() {
       console.log('user data =>',doc.data())
       setLoading(false)
       setUserData(doc.data())
+      console.log(userData)
     })
     }
     useEffect(()=>{
@@ -51,7 +52,7 @@ function EditProfile() {
  
 
   useEffect(()=>{
-    if(isLoggedIn && isLoggedIn?.photoURL){
+    if(isLoggedIn && isLoggedIn.photoURL){
     setPhotoURL(isLoggedIn.photoURL)
     }else{
       setPhotoURL("https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=")
@@ -62,50 +63,43 @@ function EditProfile() {
   }
   
  
-      const uploadCover = async () => {
-        getUser()
-
+      // const uploadCover = async () => {
       //   const coverRef = ref(
       //     storage,
       //     `cover/${new Date().getTime()} - ${url.name}`
-
       //   )
-      //   try {
-        
+      //   try {      
       //     const snap = await uploadBytes(coverRef, url);
       //     const coverUrl = await getDownloadURL(ref(storage, snap.ref.fullPath));
-
       //     await updateDoc(doc(db, "users", isLoggedIn.uid), {
       //       coverPhoto: coverUrl,
       //       // avatarPath: snap.ref.fullPath,
       //     });
-
       //     setUrl("");
       //   } catch (err) {
       //     console.log(err.message);
       //   }
       // };
-  
-          const coverUrl=url
-          const coverRef = ref(storage,'cover');
-          setUploading(true)
-          uploadBytes(coverRef,url).then(()=>{
-           const urlC=   getDownloadURL(coverRef).then((cu)=>{
-            if(coverUrl===null && userData.coverPhoto){
-              coverUrl=userData.coverPhoto;
-            }
-             updateDoc(doc(db, "users", isLoggedIn.uid), {
-              coverPhoto: coverUrl,
-              // avatarPath: snap.ref.fullPath,
-            });
-           }).catch((e)=>{console.log(e.message)
-          }); setUploading(false)
-          setUrl('');
-          }) .catch ((e) =>{
-           console.log(e.message);
-           }
-          )}
-     ;
+    //       const coverUrl=url
+    //       const coverRef = ref(storage,'cover');
+    //       setUploading(true)
+    //       uploadBytes(coverRef,url).then(()=>{
+    //        const urlC=   getDownloadURL(coverRef).then((cu)=>{
+    //         if(coverUrl===null && userData.coverPhoto){
+    //           coverUrl=userData.coverPhoto;
+    //         }
+    //          updateDoc(doc(db, "users", isLoggedIn.uid), {
+    //           coverPhoto: coverUrl,
+    //           // avatarPath: snap.ref.fullPath,
+    //         });
+    //        }).catch((e)=>{console.log(e.message)
+    //       }); setUploading(false)
+    //       setUrl('');
+    //       }) .catch ((e) =>{
+    //        console.log(e.message);
+    //        }
+    //       )}
+    //  ;
     
 
     
@@ -199,20 +193,20 @@ const imageHandlerD=(e)=>{
     }
   }
   reader.readAsDataURL(e.target.files[0])
-  if( e.target.files[0]){
-      setPhotoURL(e.target.files[0])
-     }
+  // if( e.target.files[0]){
+  //     setPhotoURL(e.target.files[0])
+  //    }
 }
 
 
 const imageHandlerC=(e)=>{
-  if( e.target.files[0]){
-    setUrl(e.target.files[0])
-   }
+  // if( e.target.files[0]){
+  //   setUrl(e.target.files[0])
+  //  }
   const reader = new FileReader()
   reader.onload=()=>{
     if(reader.readyState===2){
-      setUrl(reader.result)
+      setCoverPhoto(reader.result)
     }
   }
   reader.readAsDataURL(e.target.files[0])
@@ -265,10 +259,10 @@ const imageHandlerC=(e)=>{
 
   const handleUpdate=async(e)=>{
     e.preventDefault()
-    let coverUrl=await uploadCover();
-  if(coverUrl===null && userData.coverPhoto){
-      coverUrl=userData.coverPhoto;
-    }
+  //   let coverUrl=await uploadCover();
+  // if(coverUrl===null && userData.coverPhoto){
+  //     coverUrl=userData.coverPhoto;
+  //   }
    updateDoc(doc(db,'users',isLoggedIn.uid),{
             username:userData.username,
             address:userData.address,
@@ -276,7 +270,6 @@ const imageHandlerC=(e)=>{
           }).then(()=>{
             console.log('Updated Successfully')
             navigate('/profile')})
-            
          .catch( (err) => {
           console.log(err.message);
         })
@@ -292,7 +285,7 @@ const imageHandlerC=(e)=>{
     <div>
         <h2 className='h-etitle'>Edit Account Details</h2>
     <div className='p-econtainer'>
-      <img className='p-cover' src={userData ? userData.coverPhoto : '../images/cover.jpg'}/>
+      <img className='p-cover' src='../images/cover.jpg'/>
       <img className='p-dp' src={photoURL}/>
       <input type='file'   id='edit-cover' onChange={imageHandlerC} accept='image/*'></input> 
       <div className='div-lbl2'>

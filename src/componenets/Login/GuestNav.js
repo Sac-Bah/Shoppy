@@ -9,7 +9,7 @@ import { db} from '../Firebase'
 function GuestNav() {
   const navigation= useNavigate()
   const{isLoggedIn}= useLogin()
-  const [photoURL, setPhotoURL]= useState("https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=")
+  const [photoURL, setPhotoURL]= useState('')
 
   const[userData,setUserData]=useState(null)
   const [loading,setLoading]=useState(true)
@@ -18,13 +18,14 @@ function GuestNav() {
   useEffect(()=>{
     if(isLoggedIn && isLoggedIn.photoURL){
     setPhotoURL(isLoggedIn.photoURL)
-    }
+    }else(
+      setPhotoURL('https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=')
+    )
   }, [isLoggedIn])  
 
   const getUser=async()=>{ 
     const userCollection= doc(db,'users',isLoggedIn.uid)
      await onSnapshot(userCollection,(doc)=>{
-      console.log('user data =>',doc.data())
       setLoading(false)
       setUserData(doc.data())
     })
@@ -71,6 +72,7 @@ function GuestNav() {
 
         <ul className="dropdown-menu">
             <li><a className="dropdown-item" href='http://localhost:3000/profile'>View Profile</a></li>
+            <li><a className="dropdown-item" href='http://localhost:3000/create-product'>Create Product</a></li>
              <li><a className="dropdown-item" href="#" onClick={logout}>Logout</a></li>
          </ul>
          </div>
