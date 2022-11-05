@@ -14,29 +14,30 @@ import { db} from './Firebase'
 function Navbar() {
   const {isLoggedIn}= useLogin()
   const navigation= useNavigate()
+
   const [photoURL, setPhotoURL]= useState('')
   const[userData,setUserData]=useState(null)
   const [loading,setLoading]=useState(true)
-  const [value,setValue]=useState('')
-  const [data,setData]= useState([])
-  const [filtered,setFiltered]=useState(data)
+  const [search,setSearch]=useState('')
+  // const [data,setData]= useState([])
+  // const [filtered,setFiltered]=useState(data)
 
  
-  useEffect(() => {
-    const getThings = async () =>{ 
-      const result= await getDocs(collection(db, 'products'))
-      setData(result.docs.map(doc => ({...doc.data(), id: doc.id})))
-    }
+//   useEffect(() => {
+//     const getThings = async () =>{ 
+//       const result= await getDocs(collection(db, 'products'))
+//       setData(result.docs.map(doc => ({...doc.data(), id: doc.id})))
+//     }
 
-    getThings()
-  }, [])
+//     getThings()
+//   }, [])
 
-useEffect(()=>{
-  const res=data.filter((item)=>{
-    item.name.toLowerCase().includes(value)
-  })
-  setFiltered(res)
-},[value])
+// useEffect(()=>{
+//   const res=data.filter((item)=>{
+//     item.name.toLowerCase().includes(value)
+//   })
+//   setFiltered(res)
+// },[value])
 
   useEffect(()=>{
     if(isLoggedIn && isLoggedIn.photoURL){
@@ -68,6 +69,12 @@ useEffect(()=>{
     .catch(err=> alert(err.message))
   }
 
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    navigation(`/search?name=${search}`)
+    setSearch('')
+  }
+
   return (
     <div className='nav-div'>
         <nav className='nav-m'>
@@ -81,11 +88,12 @@ useEffect(()=>{
               <li className='nav-link'><a className='links-a' href='http://localhost:3000/recommended'>Recommended</a></li>
             </ul>
           
-            
-            <input className='search-bar' type='text' placeholder='Search Product...' onChange={(e)=>setValue(e.target.value)}></input>
-{filtered.map((pd)=>{
+            <form onSubmit={handleSubmit}>
+            <input className='search-bar' type='text' placeholder='Search Product...' onChange={(e)=>setSearch(e.target.value)} value={search}></input>
+            </form>
+{/* {filtered.map((pd)=>{
   return(<h1>{pd.name}</h1>)
-})}
+})} */}
 
 
 
