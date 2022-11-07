@@ -7,15 +7,15 @@ import { Link } from 'react-router-dom'
 function ProductBrand() {
     const [data,setData]=useState([])
 
-    const colRef= collection(db, 'products')
-    const q = query(colRef, where('brand', '==','Salt'))
-    onSnapshot(q,(snapshot)=>{
-        let list=[]
-        snapshot.docs.forEach((doc)=>{
-            list.push({...doc.data(),id:doc.id})
-        })
-        setData(list)
-    })
+    // const colRef= collection(db, 'products')
+    // const q = query(colRef, where('brand', '==','Salt'))
+    // onSnapshot(q,(snapshot)=>{
+    //     let list=[]
+    //     snapshot.docs.forEach((doc)=>{
+    //         list.push({...doc.data(),id:doc.id})
+    //     })
+    //     setData(list)
+    // })
 
     
         

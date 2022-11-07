@@ -35,29 +35,7 @@ useEffect(()=>{
 
 },[search,productData])
 
-    // const getThings = async () =>{ 
-    //   const result= await getDocs(collection(db, 'products'))
-    //   setData(result.docs.map(doc => ({...doc.data(), id: doc.id})))
-    // }
-
-
-    // useEffect(()=>{
-
-    //     filterSearch()
-    // },[search])
-   
-
-    // const filterSearch=()=>{
-    //     getThings()
-    //     const res = data.filter((item)=>{
-    //         item.name.toLowerCase().includes(search)
-    //         })
-    //         setFiltered(res)
-    //     }
     
-
-    // console.log(filtered)
-
   return (
     <div>
       <h2 className='search-h'>Search results for '{search}'</h2>

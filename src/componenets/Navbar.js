@@ -19,25 +19,7 @@ function Navbar() {
   const[userData,setUserData]=useState(null)
   const [loading,setLoading]=useState(true)
   const [search,setSearch]=useState('')
-  // const [data,setData]= useState([])
-  // const [filtered,setFiltered]=useState(data)
-
- 
-//   useEffect(() => {
-//     const getThings = async () =>{ 
-//       const result= await getDocs(collection(db, 'products'))
-//       setData(result.docs.map(doc => ({...doc.data(), id: doc.id})))
-//     }
-
-//     getThings()
-//   }, [])
-
-// useEffect(()=>{
-//   const res=data.filter((item)=>{
-//     item.name.toLowerCase().includes(value)
-//   })
-//   setFiltered(res)
-// },[value])
+  
 
   useEffect(()=>{
     if(isLoggedIn && isLoggedIn.photoURL){

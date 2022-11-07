@@ -1,17 +1,41 @@
 import React, { useState,useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import {  doc, onSnapshot, updateDoc,setDoc,collection,getDoc} from 'firebase/firestore'
+import {  doc, onSnapshot, updateDoc,setDoc,collection,getDoc,query,where} from 'firebase/firestore'
 import {db} from '../../Firebase'
 
 function ProductDisplay() {
     const {id}=useParams()
     const [data,setData]=useState([])
- 
-          const result= doc(db, 'products',id)
-      // getDoc(result).then((doc)=>{console.log(doc.data(),doc.id)})
-       onSnapshot(result,(doc)=>{setData(doc.data())})
+
+    const [brandData,setBrandData]=useState([])
+
+    useEffect(()=>{
+      const getData=async()=>{
+      const result= await doc(db, 'products',id)
+      onSnapshot(result,(doc)=>{setData(doc.data())})}
+      getData()
+    },[])
+         
+console.log(data)
+
+let res = data.brand
 
 
+useEffect(()=>{
+  const colRef= collection(db, 'products')
+  const q = query(colRef, where('brand', '==', data.brand))
+  onSnapshot(q,(snapshot)=>{
+      let list=[]
+      snapshot.docs.forEach((doc)=>{
+          list.push({...doc.data(),id:doc.id})
+      })
+      console.log(list)
+      // setBrandData(list)
+      // console.log(brandData)
+  })
+
+},[])
+  
   return (
     <div>
         <Link to={'/shop'}><button className='back-btn'>⬅ Back to shop</button></Link>
@@ -30,7 +54,7 @@ function ProductDisplay() {
 
      <p className='bpps'>Lens Width and Frame Size</p>
      <select id='size'>
-         <option value='' disabled selected hidden>~Select Size ~ </option>
+         <option value='' disabled selected hidden> ~ Select Size ~ </option>
          <option value='28 mm'>28 mm</option>
          <option value='36 mm'>36 mm</option>
          <option value='42 mm'>42 mm</option>
@@ -51,6 +75,7 @@ function ProductDisplay() {
      <button className='bskt-btn'>Add To Basket</button>
  </div>
  </div>
+
 
     
     </div>
