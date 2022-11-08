@@ -10,7 +10,9 @@
   margin-left: 5%;
   border-radius: 52px;
 }
-
+.logo:hover{
+  cursor: pointer;
+}
 
 .nav-ul {
   margin-top: -72px;
@@ -40,7 +42,7 @@ display: inline-block;
   padding: 10px;
   width: 20%;
   float: right;
-  margin-top: -72px;
+  margin-top: -70px;
   margin-right: 22%;
   border:1px solid rgb(203, 203, 203)
 
@@ -57,14 +59,14 @@ display: inline-block;
   background-color: black;
   color: white;
   float: right;
-  margin-top: -73px;
-  margin-right: 9.5%;
+  margin-top: -70px;
+  margin-right: 3%;
 }
 
 .btn-in{
   float: right;
-  margin-top: -73px;
-  margin-right: 3.5%;
+  margin-top: -70px;
+  margin-right: 9%;
   background-color: rgb(249, 249, 249);
   color: rgb(143,143,143);
   font-weight: 700;
@@ -315,7 +317,7 @@ display: inline-block;
 
 .dropdown{
   margin-left: 85%;
-  margin-top: -69px;
+  margin-top: -70px;
 }
 
 .p-container{
@@ -853,3 +855,16 @@ width: auto;
   margin-left: 40%;
   padding-bottom: 30px;
 }
+
+.morep-div{
+  margin-top: 60px;
+  margin-left: 130px;
+}
+#b-dd{
+  margin-left: 45%;
+  margin-top: -54px;
+  width: 10px;
+}
+/* .pp-div{
+  margin-top: 10px;
+} */

@@ -35,12 +35,15 @@ useEffect(()=>{
 
 },[search,productData])
 
+    if(query.get('name')=== '' || query.get('name')=== ' '){
+      return <h2 style={{ marginLeft: '380px', marginTop: '200px' }} > ☹ Page you are looking for doesn't exists.</h2>
+    }
     
   return (
     <div>
       <h2 className='search-h'>Search results for '{search}'</h2>
-
-      <div className='grid-div'>
+{Object.keys(filtered).length===0 ? (<h3 style={{ marginLeft: '590px', marginTop: '100px' }}>No Product Found</h3>) : 
+<div className='grid-div'>
 {filtered.map((pdata)=>{return(<Link  style={{ textDecoration: 'none' }} to={`/product/${pdata.id}`}><div className='feat-prdct-div'>
         <div className='prdct-img-div'>
           <img className='prdct-img' src={pdata.img}></img>
@@ -52,7 +55,8 @@ useEffect(()=>{
       </div>
       </Link>
     )})}
-    </div>
+    </div> }
+      
     </div>
   )
 }

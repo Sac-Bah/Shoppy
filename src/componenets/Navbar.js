@@ -5,6 +5,7 @@ import {signOut} from 'firebase/auth'
 import { Link,useNavigate } from 'react-router-dom'
 import {  doc, onSnapshot, collection,getDocs } from 'firebase/firestore'
 import { db} from './Firebase'
+import FilterB from './Filter.js/FilterB'
 
 
  
@@ -17,7 +18,7 @@ function Navbar() {
 
   const [photoURL, setPhotoURL]= useState('')
   const[userData,setUserData]=useState(null)
-  const [loading,setLoading]=useState(true)
+
   const [search,setSearch]=useState('')
   
 
@@ -32,7 +33,6 @@ function Navbar() {
   const getUser=async()=>{ 
     const userCollection= doc(db,'users',isLoggedIn.uid)
      await onSnapshot(userCollection,(doc)=>{
-      setLoading(false)
       setUserData(doc.data())
     })
     }
@@ -40,9 +40,7 @@ function Navbar() {
     useEffect(()=>{
       getUser()
       },[]);
-      if(loading){
-        return <></>
-      }
+    
   
 
   function logout(){
@@ -70,13 +68,14 @@ function Navbar() {
               <li className='nav-link'><a className='links-a' href='http://localhost:3000/recommended'>Recommended</a></li>
             </ul>
           
+         
+    
+      
+
+
             <form onSubmit={handleSubmit}>
             <input className='search-bar' type='text' placeholder='Search Product...' onChange={(e)=>setSearch(e.target.value)} value={search}></input>
             </form>
-{/* {filtered.map((pd)=>{
-  return(<h1>{pd.name}</h1>)
-})} */}
-
 
 
 {isLoggedIn ?  <><div className='dropdown'>
@@ -86,13 +85,14 @@ function Navbar() {
 
         <ul className="dropdown-menu">
             <li><a className="dropdown-item" href='http://localhost:3000/profile'>View Profile</a></li>
-            <li><a className="dropdown-item" href='http://localhost:3000/create-product'>Create Product</a></li>
+        <li><a className="dropdown-item" href='http://localhost:3000/create-product'>Create Product</a></li> 
              <li><a className="dropdown-item" href="#" onClick={logout}>Logout</a></li>
          </ul>
          </div>
          </>
             : 
-            <><Link to={'/signup'}>
+            <>
+          <Link to={'/signup'}>
            <button  className='btn-up'>Sign Up</button>
           </Link>
           
