@@ -38,6 +38,7 @@ function App() {
       <Route path='/profile/edit' element={<EditProfile/>}></Route>
       <Route path='/product/:id' element={<ProductDisplay/>}></Route>
       <Route path='/search' element={<Search/>}></Route>
+      <Route path='/b' element={<ProductBrand></ProductBrand>}></Route>
       </Routes>
       
 

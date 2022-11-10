@@ -6,39 +6,44 @@ import { db} from './Firebase'
 import FilterB from './Filter.js/FilterB'
 import { async } from '@firebase/util'
 import { Dropdown } from 'react-bootstrap'
-
+import Pagination from './Pagination/Pagination'
 
 
 
 function Shop() {
   const [data,setData]= useState([])
  const [filtered,setFiltered]=useState([])
+ const [currentPage,setCurrentPage]= useState(1)
+ const[itemsPerPage]=useState(6)
 
 
- useEffect(() => {
-  const getThings = async () =>{ 
-    const result= await getDocs(collection(db, 'products'))
-    setData(result.docs.map(doc => ({...doc.data(), id: doc.id})))
-  }
-  getThings()
-
-}, [])
+  useEffect(() => {
+    const getThings = async () =>{ 
+      const result= await getDocs(collection(db, 'products'))
+      setData(result.docs.map(doc => ({...doc.data(), id: doc.id})))
+    }
+    getThings()
+  }, [])
 
 
   const filterData=  (filVal)=>{
     setFiltered(data.filter((itm)=>{
         return itm.brand===filVal;
     }))
-    
     console.log(data)
 }
 
-  
-const returntoAll=()=>{
-setFiltered([]);
-}
+  const returntoAll=()=>{
+  setFiltered([]);
+  }
 
  
+const indexOfLastItem = currentPage * itemsPerPage
+const indexOfFirstItem = indexOfLastItem - itemsPerPage
+const currentData= data.slice(indexOfFirstItem,indexOfLastItem)
+
+const totalPages= Math.ceil(data.length/itemsPerPage)
+
 
   return (
    
@@ -85,7 +90,7 @@ setFiltered([]);
   <>
    <h2 style={{marginTop:'40px', textAlign:'center'}}>All Products</h2>
       <div className='grid-div'>
-  {data.map(pdata=>{
+  {currentData.map(pdata=>{
 return(<Link  style={{ textDecoration: 'none' }} to={`/product/${pdata.id}`}><div className='feat-prdct-div'>
         <div className='prdct-img-div'>
           <img className='prdct-img' src={pdata.img}></img>
@@ -99,6 +104,7 @@ return(<Link  style={{ textDecoration: 'none' }} to={`/product/${pdata.id}`}><di
     
       )})}
         </div>
+        <Pagination pages={totalPages} setCurrentPage={setCurrentPage} />
         </>)}
 
       
