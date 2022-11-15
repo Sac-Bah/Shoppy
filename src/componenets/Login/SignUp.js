@@ -1,50 +1,73 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {Link, useNavigate } from 'react-router-dom'
 import { auth, db } from '../Firebase'
 import {createUserWithEmailAndPassword} from'firebase/auth'
 import {signInWithPopup, GoogleAuthProvider, updateProfile} from 'firebase/auth'
 import { useLogin } from '../AuthContext'
-import { user } from '../AuthContext'
 import firebase from 'firebase/compat/app'
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
-import { async } from '@firebase/util'
+import {gsiInitiate, signupInitiate} from '../../Redux/Action'
 
 function SignUp() {
  const {isLoggedIn}= useLogin()
   const navigate = useNavigate()
-  const [email,setEmail] = useState('')
-  const [password,setPassword] = useState('')
-  const [username,setUsername] = useState('')
+  const [state,setState]=useState({
+    email:'',
+    password:'',
+    username:''
+  })
+  // const [email,setEmail] = useState('')
+  // const [password,setPassword] = useState('')
+  // const [username,setUsername] = useState('')
 
 
-  const update = {
-    displayName: username
 
-  };
 
-  
+const {currentUser}= useSelector((state) => state.user)
+const dispatch = useDispatch()
+const {email,username,password}=state
 
-  const handleRegister = (e) => {
-    e.preventDefault()
-    createUserWithEmailAndPassword(auth, email,password)
-      .then(async (res) => {
-        firebase.auth().currentUser.updateProfile(update)
-        await setDoc(doc(db,'users', res.user.uid), {username, email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:res.user.photoURL})    
-        navigate('/')
-      })
-      .catch(err => {alert(err.message)})
+// useEffect(()=>{
+//   if(currentUser){
+   
+//   }
+// }, [currentUser, navigate])
+
+
+  const handleChange = (e) => {
+    let {name,value}= e.target
+    setState({...state, [name]:value})
   }
+  
+//  const update = {
+//   displayName: username
+//  }
+
+const handleRegister=(e)=>{
+  e.preventDefault()
+  dispatch(signupInitiate(email,password,username))
+  navigate('/')
+  setState({email:'', password:'', username:''})
+
+}
+
+  // const handleRegister = (e) => {
+  //   e.preventDefault()
+  //   createUserWithEmailAndPassword(auth, email,password)
+  //     .then(async (res) => {
+  //       firebase.auth().currentUser.updateProfile(update)
+  //       await setDoc(doc(db,'users', res.user.uid), {username, email, timeStamp: serverTimestamp(), address:"", phoneNumber:"", coverPhoto:'', profilePhoto:res.user.photoURL})    
+  //       navigate('/')
+  //     })
+  //     .catch(err => {alert(err.message)})
+  // }
 
 
   const signInWithGoogle=()=>{
-    const provider = new GoogleAuthProvider() 
-    signInWithPopup(auth,provider)
-    .then(async(res) => {
-      await setDoc(doc(db,'users', res.user.uid), {username:res.user.displayName, email: res.user.email, timeStamp: serverTimestamp(), address:'', phoneNumber:'', coverPhoto:'', profilePhoto:res.user.photoURL})
-      navigate('/')}
-      )
-    .catch(err => {alert(err.message)})
+    dispatch(gsiInitiate())
+    navigate('/')
   }
   return (
     <div>
@@ -53,15 +76,15 @@ function SignUp() {
 
         <p className='para-up'>*Full Name</p>
         <input className='inp-up' type='text' placeholder='Saber'  name='username' value={username}
-        onChange={event => setUsername(event.target.value)}></input>
+        onChange={handleChange}></input>
 
         <p className='para-up'>*Email</p>
         <input className='inp-up' type='email' placeholder='test@example.com' name='email' value={email}
-        onChange={event => setEmail(event.target.value)}></input> 
+        onChange={handleChange}></input> 
         
         <p className='para-up'>*Password</p>
         <input className='inp-up' type='password' placeholder='Your password' name='password' value={password}
-        onChange={event => setPassword(event.target.value)}></input>
+        onChange={handleChange}></input>
 
         <button type='submit' className='btn-signup' onClick={handleRegister} >Sign Up</button>
       </div>
@@ -72,7 +95,7 @@ function SignUp() {
       </div>
 
       <div className='div-gbtn'>
-      <button className='btn-gup' onClick={signInWithGoogle}>Continue with Google</button>
+      <button className='btn-gup'  onClick={signInWithGoogle}>Continue with Google</button>
       </div>
 
       <div className='footer-para'>

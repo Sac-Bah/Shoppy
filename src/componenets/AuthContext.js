@@ -1,10 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import {app} from './Firebase'
-import { storage } from './Firebase'
-import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
-import {updateProfile} from 'firebase/auth'
-import {  doc, onSnapshot, updateDoc } from 'firebase/firestore'
-import { db} from './Firebase'
+import { useDispatch } from 'react-redux'
+import { setUser } from 'Redux/Action';
 
 
 
@@ -18,12 +15,17 @@ const AuthContext= React.createContext()
   const [isLoggedIn,setIsLoggedIn]= useState(null)
   const [pending,setPending]= useState(true)
 
-
+  const dispatch=useDispatch()
 
 
 
   useEffect(()=>{
     app.auth().onAuthStateChanged((user) => {
+      if(user){
+        dispatch(setUser(user))
+       }else{
+        dispatch(setUser(null))
+       }
       console.log(user)
       setIsLoggedIn(user)
       setPending(false)

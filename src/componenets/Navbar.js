@@ -1,11 +1,13 @@
 import { useLogin } from './AuthContext'
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { auth } from './Firebase'
 import {signOut} from 'firebase/auth'
 import { Link,useNavigate } from 'react-router-dom'
 import {  doc, onSnapshot, collection,getDocs } from 'firebase/firestore'
 import { db} from './Firebase'
 import FilterB from './Filter.js/FilterB'
+import { logoutInitiate } from 'Redux/Action'
 
 
  
@@ -20,7 +22,8 @@ function Navbar() {
   const[userData,setUserData]=useState(null)
 
   const [search,setSearch]=useState('')
-  
+  const {currentUser}= useSelector((state) => state.user)
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     if(isLoggedIn && isLoggedIn.photoURL){
@@ -44,9 +47,9 @@ function Navbar() {
   
 
   function logout(){
-    signOut(auth)
-    .then(res => {navigation('/signup')})
-    .catch(err=> alert(err.message))
+      dispatch(logoutInitiate())
+      navigation('/signup')
+    
   }
 
   const handleSubmit=(e)=>{
